@@ -1,0 +1,38 @@
+Question 1028:
+
+Level:Hard
+Topic:Binary Tree
+Code:
+
+class Solution {
+public:
+    int i = 0; 
+
+    TreeNode* helper(string &traversal, int depth) {
+        int count = 0;
+        while (i < traversal.size() && traversal[i] == '-') {
+            count++;
+            i++;
+        }
+
+        if (count != depth) {
+            i -= count; 
+            return nullptr;
+        }
+
+        int num = 0;
+        while (i < traversal.size() && isdigit(traversal[i])) {
+            num = num * 10 + (traversal[i] - '0');
+            i++;
+        }
+
+        TreeNode* node = new TreeNode(num);
+        node->left = helper(traversal, depth + 1);
+        node->right = helper(traversal, depth + 1);
+        return node;
+    }
+
+    TreeNode* recoverFromPreorder(string traversal) {
+        return helper(traversal, 0);
+    }
+};
