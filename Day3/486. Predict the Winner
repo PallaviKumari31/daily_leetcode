@@ -1,0 +1,33 @@
+Question 486:
+
+Level:medium
+Topic:DP
+Code:
+
+class Solution {
+public:
+    int rec(vector<int>& nums, int left, int right, int m1, int m2, int flag)
+    {
+        if(left > right) {
+            return m1 - m2;
+        }
+        
+        if(flag == 1) {
+            return max(
+                rec(nums, left + 1, right, m1 + nums[left], m2, 0), 
+                rec(nums, left, right - 1, m1 + nums[right], m2, 0)
+            );
+        } else {
+            return min(
+                rec(nums, left + 1, right, m1, m2 + nums[left], 1), 
+                rec(nums, left, right - 1, m1, m2 + nums[right], 1)
+            );
+        }
+    }
+
+    bool predictTheWinner(vector<int>& nums) {
+        int n = nums.size();
+        int r = rec(nums, 0, n - 1, 0, 0, 1);
+        return r >= 0;
+    }
+};
