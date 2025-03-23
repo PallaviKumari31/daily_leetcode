@@ -1,0 +1,32 @@
+Question 2545:
+
+Level:medium
+Topic:Array
+Code:
+
+class Solution {
+public:
+    vector<vector<int>> sortTheStudents(vector<vector<int>>& score, int k) {
+        int n=score.size();
+        int m=score[0].size();
+        vector<int> a;
+        unordered_map<int,int> mp;
+
+        for (int i=0;i<n;i++){
+            a.push_back(score[i][k]);
+            mp[score[i][k]]=i;
+        }
+        sort(a.begin(), a.end());
+        reverse(a.begin(),a.end());
+        int j=0;
+        vector<vector<int>> ans;
+        for (int i=0;i<n;i++){
+            int c=a[i];
+            int row=mp[c];
+            ans.push_back(score[row]);
+
+        }
+        return ans;
+        
+    }
+};
