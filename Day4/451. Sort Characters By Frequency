@@ -1,0 +1,24 @@
+Question 451:
+
+Level:hard
+Topic:Linked List
+Code:
+
+class Solution {
+public:
+    string frequencySort(string s) {
+        unordered_map<char,int> m;
+        multimap<int,char> ans;
+        string res="";
+      for(auto a:s){
+        m[a]++;
+      }
+      for(auto b:m){
+        ans.insert({b.second,b.first});
+      }
+     for(auto c=ans.rbegin();c!=ans.rend();c++){
+        res+=string(c->first,c->second);
+     }
+     return res;
+    }
+};
