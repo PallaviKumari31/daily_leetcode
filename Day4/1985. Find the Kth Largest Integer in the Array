@@ -1,0 +1,25 @@
+Question 1985:
+
+Level:hard
+Topic:Array
+Code:
+
+class Solution {
+public:
+    string kthLargestNumber(vector<string>& nums, int k) {
+
+        auto cmp=[](string &s1,string &s2){
+            if(s1.size()==s2.size())
+            return s1>s2;
+            else
+            return s1.size() > s2.size();
+        };
+        priority_queue<string,vector<string>,decltype(cmp)> pq(cmp);
+        for(int i=0;i<nums.size();i++){
+            pq.push(nums[i]);
+            if(pq.size()>k)
+            pq.pop();
+        }
+        return pq.top();
+    }
+};
