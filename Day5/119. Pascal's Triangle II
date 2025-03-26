@@ -1,0 +1,20 @@
+Question 119:
+
+Level:easy
+Topic:Array
+Code:
+
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+        vector<int> v1 {1},v2{1};
+        for(int i=1;i<=rowIndex;i++){
+            v1.push_back(1);
+            for(int j=1;j<i;j++){
+                v1[j]=v2[j]+v2[j-1];
+            }
+            v2=v1;
+        }
+        return v1;
+    }
+};
